@@ -12,7 +12,7 @@ var autolink = (function () {
   var getDefaultLinkTarget = function (editor) {
     return editor.getParam('default_link_target', '');
   };
-  var $_bd2lxb8ejnsufou7 = {
+  var $_6mb5vf8eju84rojp = {
     getAutoLinkPattern: getAutoLinkPattern,
     getDefaultLinkTarget: getDefaultLinkTarget
   };
@@ -57,8 +57,8 @@ var autolink = (function () {
   };
   var parseCurrentLine = function (editor, endOffset, delimiter) {
     var rng, end, start, endContainer, bookmark, text, matches, prev, len, rngText;
-    var autoLinkPattern = $_bd2lxb8ejnsufou7.getAutoLinkPattern(editor);
-    var defaultLinkTarget = $_bd2lxb8ejnsufou7.getDefaultLinkTarget(editor);
+    var autoLinkPattern = $_6mb5vf8eju84rojp.getAutoLinkPattern(editor);
+    var defaultLinkTarget = $_6mb5vf8eju84rojp.getDefaultLinkTarget(editor);
     if (editor.selection.getNode().tagName === 'A') {
       return;
     }
@@ -166,10 +166,10 @@ var autolink = (function () {
       }
     });
   };
-  var $_bimexw8cjnsufou1 = { setup: setup };
+  var $_6wzw3i8cju84rojk = { setup: setup };
 
   global.add('autolink', function (editor) {
-    $_bimexw8cjnsufou1.setup(editor);
+    $_6wzw3i8cju84rojk.setup(editor);
   });
   function Plugin () {
   }
