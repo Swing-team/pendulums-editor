@@ -5,10 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-
-const getTinymce = () => {
-  const w = typeof window !== 'undefined' ? (window as any) : undefined;
-  return w && w.tinymce ? w.tinymce : null;
-};
-
+declare const getTinymce: () => any;
 export { getTinymce };
