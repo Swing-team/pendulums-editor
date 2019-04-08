@@ -36,7 +36,7 @@ var codesample = (function () {
   var getDialogMinHeight = function (editor) {
     return Math.min(global$1.DOM.getViewPort().w, editor.getParam('codesample_dialog_height', 650));
   };
-  var $_1rxqb18kju84roka = {
+  var $_f8mj6m8kju8gpmyh = {
     getContentCss: getContentCss,
     getLanguages: getLanguages,
     getDialogMinWidth: getDialogMinWidth,
@@ -718,14 +718,14 @@ var codesample = (function () {
       return predicateFn(arg2);
     };
   }
-  var $_er6voj8pju84rolj = {
+  var $_fillqg8pju8gpmzr = {
     isCodeSample: isCodeSample,
     trimArg: trimArg
   };
 
   var getSelectedCodeSample = function (editor) {
     var node = editor.selection.getNode();
-    if ($_er6voj8pju84rolj.isCodeSample(node)) {
+    if ($_fillqg8pju8gpmzr.isCodeSample(node)) {
       return node;
     }
     return null;
@@ -736,8 +736,8 @@ var codesample = (function () {
       code = global$1.DOM.encode(code);
       if (node) {
         editor.dom.setAttrib(node.children[0], 'class', 'language-' + language);
-        node.innerHTML = code;
-        Prism.highlightElement(node);
+        node.children[0].innerHTML = code;
+        Prism.highlightElement(node.children[0]);
         editor.selection.select(node);
       } else {
         editor.insertContent('<pre id="__new"><code class="language-' + language + '">' + code + '</code></pre>');
@@ -752,7 +752,7 @@ var codesample = (function () {
     }
     return '';
   };
-  var $_4x41zk8mju84rokb = {
+  var $_5nv3pa8mju8gpmyi = {
     getSelectedCodeSample: getSelectedCodeSample,
     insertCodeSample: insertCodeSample,
     getCurrentCode: getCurrentCode
@@ -801,30 +801,30 @@ var codesample = (function () {
         value: 'cpp'
       }
     ];
-    var customLanguages = $_1rxqb18kju84roka.getLanguages(editor);
+    var customLanguages = $_f8mj6m8kju8gpmyh.getLanguages(editor);
     return customLanguages ? customLanguages : defaultLanguages;
   };
   var getCurrentLanguage = function (editor) {
     var matches;
-    var node = $_4x41zk8mju84rokb.getSelectedCodeSample(editor);
+    var node = $_5nv3pa8mju8gpmyi.getSelectedCodeSample(editor);
     if (node) {
       matches = node.className.match(/language-(\w+)/);
       return matches ? matches[1] : '';
     }
     return '';
   };
-  var $_8ufu5l8qju84rolk = {
+  var $_80vzb38qju8gpmzs = {
     getLanguages: getLanguages$1,
     getCurrentLanguage: getCurrentLanguage
   };
 
-  var $_d5yg908jju84rok9 = {
+  var $_535q6q8jju8gpmyg = {
     open: function (editor) {
-      var minWidth = $_1rxqb18kju84roka.getDialogMinWidth(editor);
-      var minHeight = $_1rxqb18kju84roka.getDialogMinHeight(editor);
-      var currentLanguage = $_8ufu5l8qju84rolk.getCurrentLanguage(editor);
-      var currentLanguages = $_8ufu5l8qju84rolk.getLanguages(editor);
-      var currentCode = $_4x41zk8mju84rokb.getCurrentCode(editor);
+      var minWidth = $_f8mj6m8kju8gpmyh.getDialogMinWidth(editor);
+      var minHeight = $_f8mj6m8kju8gpmyh.getDialogMinHeight(editor);
+      var currentLanguage = $_80vzb38qju8gpmzs.getCurrentLanguage(editor);
+      var currentLanguages = $_80vzb38qju8gpmzs.getLanguages(editor);
+      var currentCode = $_5nv3pa8mju8gpmyi.getCurrentCode(editor);
       editor.windowManager.open({
         title: 'Insert/Edit code sample',
         minWidth: minWidth,
@@ -855,7 +855,7 @@ var codesample = (function () {
           }
         ],
         onSubmit: function (e) {
-          $_4x41zk8mju84rokb.insertCodeSample(editor, e.data.language, e.data.code);
+          $_5nv3pa8mju8gpmyi.insertCodeSample(editor, e.data.language, e.data.code);
         }
       });
     }
@@ -864,19 +864,19 @@ var codesample = (function () {
   var register = function (editor) {
     editor.addCommand('codesample', function () {
       var node = editor.selection.getNode();
-      if (editor.selection.isCollapsed() || $_er6voj8pju84rolj.isCodeSample(node)) {
-        $_d5yg908jju84rok9.open(editor);
+      if (editor.selection.isCollapsed() || $_fillqg8pju8gpmzr.isCodeSample(node)) {
+        $_535q6q8jju8gpmyg.open(editor);
       } else {
         editor.formatter.toggle('code');
       }
     });
   };
-  var $_8s5dbz8iju84rok8 = { register: register };
+  var $_adi8v18iju8gpmyf = { register: register };
 
   var setup = function (editor) {
     var $ = editor.$;
     editor.on('PreProcess', function (e) {
-      $('pre[contenteditable=false]', e.node).filter($_er6voj8pju84rolj.trimArg($_er6voj8pju84rolj.isCodeSample)).each(function (idx, elm) {
+      $('pre[contenteditable=false]', e.node).filter($_fillqg8pju8gpmzr.trimArg($_fillqg8pju8gpmzr.isCodeSample)).each(function (idx, elm) {
         var $elm = $(elm), code = elm.textContent;
         $elm.attr('class', $.trim($elm.attr('class')));
         $elm.removeAttr('contentEditable');
@@ -886,7 +886,7 @@ var codesample = (function () {
       });
     });
     editor.on('SetContent', function () {
-      var unprocessedCodeSamples = $('pre').filter($_er6voj8pju84rolj.trimArg($_er6voj8pju84rolj.isCodeSample)).filter(function (idx, elm) {
+      var unprocessedCodeSamples = $('pre').filter($_fillqg8pju8gpmzr.trimArg($_fillqg8pju8gpmzr.isCodeSample)).filter(function (idx, elm) {
         return elm.contentEditable !== 'false';
       });
       if (unprocessedCodeSamples.length) {
@@ -905,11 +905,11 @@ var codesample = (function () {
       }
     });
   };
-  var $_2hjxyz8rju84rolm = { setup: setup };
+  var $_7umyvn8rju8gpmzt = { setup: setup };
 
   var loadCss = function (editor, pluginUrl, addedInlineCss, addedCss) {
     var linkElm;
-    var contentCss = $_1rxqb18kju84roka.getContentCss(editor);
+    var contentCss = $_f8mj6m8kju8gpmyh.getContentCss(editor);
     if (editor.inline && addedInlineCss.get()) {
       return;
     }
@@ -929,7 +929,7 @@ var codesample = (function () {
       editor.getDoc().getElementsByTagName('head')[0].appendChild(linkElm);
     }
   };
-  var $_3nl0ja8sju84rolo = { loadCss: loadCss };
+  var $_azuvqi8sju8gpmzv = { loadCss: loadCss };
 
   var register$1 = function (editor) {
     editor.addButton('codesample', {
@@ -942,20 +942,20 @@ var codesample = (function () {
       icon: 'codesample'
     });
   };
-  var $_fqgmmh8tju84rolp = { register: register$1 };
+  var $_b3j2xd8tju8gpmzw = { register: register$1 };
 
   var addedInlineCss = Cell(false);
   global.add('codesample', function (editor, pluginUrl) {
     var addedCss = Cell(false);
-    $_2hjxyz8rju84rolm.setup(editor);
-    $_fqgmmh8tju84rolp.register(editor);
-    $_8s5dbz8iju84rok8.register(editor);
+    $_7umyvn8rju8gpmzt.setup(editor);
+    $_b3j2xd8tju8gpmzw.register(editor);
+    $_adi8v18iju8gpmyf.register(editor);
     editor.on('init', function () {
-      $_3nl0ja8sju84rolo.loadCss(editor, pluginUrl, addedInlineCss, addedCss);
+      $_azuvqi8sju8gpmzv.loadCss(editor, pluginUrl, addedInlineCss, addedCss);
     });
     editor.on('dblclick', function (ev) {
-      if ($_er6voj8pju84rolj.isCodeSample(ev.target)) {
-        $_d5yg908jju84rok9.open(editor);
+      if ($_fillqg8pju8gpmzr.isCodeSample(ev.target)) {
+        $_535q6q8jju8gpmyg.open(editor);
       }
     });
   });
